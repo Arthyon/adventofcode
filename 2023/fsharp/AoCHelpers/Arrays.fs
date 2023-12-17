@@ -14,16 +14,16 @@ let southeast = (1, 1)
 
 let private cardinalDirections = [north; south; west; east] 
 let private diagonalDirections = [northwest; southwest; northeast; southeast]
+let isValidCoordinate array (x,y) =
+    let xLength = array |> Array2D.length1
+    let yLength = array |> Array2D.length2
+    x >= 0 && y >= 0 && x < xLength && y < yLength
      
 let private createValidCoordinates (array: 't[,]) (originalX, originalY) modifiers =
-     let isValid (x,y) =
-         let xLength = array |> Array2D.length1
-         let yLength = array |> Array2D.length2
-         x >= 0 && y >= 0 && x <= xLength && y <= yLength
          
      modifiers
      |> Seq.map (fun (x,y) -> (originalX + x, originalY + y))
-     |> Seq.filter isValid
+     |> Seq.filter (isValidCoordinate array)
      
      
 let validAdjacentCoordinates (array: 't[,]) pos =
