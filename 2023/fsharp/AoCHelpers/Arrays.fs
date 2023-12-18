@@ -12,8 +12,12 @@ let southwest = (1, -1)
 let northeast = (-1, 1)
 let southeast = (1, 1)
 
-let private cardinalDirections = [north; south; west; east] 
-let private diagonalDirections = [northwest; southwest; northeast; southeast]
+let addMovement (x,y) (xMovement, yMovement) = x + xMovement, y + yMovement 
+
+let cardinalDirections = [north; south; west; east] 
+let diagonalDirections = [northwest; southwest; northeast; southeast]
+let allDirections = [northwest; southwest; northeast; southeast; north; south; west; east]
+
 let isValidCoordinate array (x,y) =
     let xLength = array |> Array2D.length1
     let yLength = array |> Array2D.length2

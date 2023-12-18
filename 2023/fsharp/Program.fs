@@ -58,5 +58,6 @@ let runner = match newConf.Day with
                                 | 15 -> Day15.run
                                 | 16 -> Day16.run
                                 | 17 -> Day17.run
+                                | 18 -> Day18.run
                                 | _ -> failwithf $"Day %i{day} not found"
 runner input
