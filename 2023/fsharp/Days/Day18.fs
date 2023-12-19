@@ -32,6 +32,7 @@ let dig ((x,y),trench, boundary) (direction, count) =
     nextCoordinate, nextCoordinate::trench, boundary + count
     
 // From https://rosettacode.org/wiki/Shoelace_formula_for_polygonal_area#F#
+#nowarn "25"
 let shoelace (n::g) = abs(List.pairwise(n::g@[n])|>List.fold(fun n ((nα,gα),(nβ,gβ))->n+(nα*gβ)-(gα*nβ)) 0.0)/2.0
 
 let solve instructions =
