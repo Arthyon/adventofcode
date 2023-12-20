@@ -112,6 +112,12 @@ let rec powerOnRx state =
         let state = pressButton state
         powerOnRx { state with ButtonPresses = state.ButtonPresses + 1. }
         
+let getCyclesToMonitor modules =
+    let m = modules |> Map.map (fun _ -> getOutputs) |> Map.findKey (fun _ v -> v |> List.contains "rx")
+    match modules[m] with
+    | Conjunction(inputs, _) -> inputs |> Seq.map (fun kvp -> kvp.Key, NoCycle) |> Map
+    | _ -> failwith "Shouldn't need cycle detection if module is not conjunction"
+    
 let run input =
     let modules = input |> Seq.map parseModule |> Map |> postprocessConjunctionModules
     let state = { TotalHighPulses = 0 ; TotalLowPulses = 0 ; Modules = modules ; ButtonPresses = 0 ; Cycles = Map[] }
@@ -122,7 +128,7 @@ let run input =
     let part1 = finalState.TotalHighPulses * finalState.TotalLowPulses
         
     // Part 2
-    // Todo build cycle list from the module map
-    let part2 = powerOnRx { state with Cycles = Map[("db", NoCycle);("sg", NoCycle); ("lm", NoCycle); ("dh", NoCycle)] }
+    let cycles = getCyclesToMonitor modules
+    let part2 = powerOnRx { state with Cycles = cycles }
     
     printResult part1 part2
