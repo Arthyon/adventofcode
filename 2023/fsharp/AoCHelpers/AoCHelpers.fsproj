@@ -13,6 +13,7 @@
         <Compile Include="Arrays.fs" />
         <Compile Include="Seqs.fs" />
         <Compile Include="Algorithms.fs" />
+        <Compile Include="Queues.fs" />
     </ItemGroup>
 
 </Project>
