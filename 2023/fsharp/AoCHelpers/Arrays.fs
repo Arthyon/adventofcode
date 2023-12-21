@@ -55,6 +55,13 @@ let print (arr: 't[,]) =
         for y in 0..(arr |> Array2D.length2) - 1 do
             printf "%A" arr[x,y]
         printfn ""
+        
+let visualizeArray (arr: 't[,]) printer =
+    for x in 0..(arr |> Array2D.length1) - 1 do
+        for y in 0..(arr |> Array2D.length2) - 1 do
+            printf "%c" (printer x y)
+        printfn ""
+
 
 
 let findIndices f (arr: 't[,]) =
